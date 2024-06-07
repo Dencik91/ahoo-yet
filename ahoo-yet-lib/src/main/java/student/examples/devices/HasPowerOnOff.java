@@ -1,4 +1,4 @@
-package students.examples.devices;
+package student.examples.devices;
 
 public interface HasPowerOnOff {
     public boolean switchOn();

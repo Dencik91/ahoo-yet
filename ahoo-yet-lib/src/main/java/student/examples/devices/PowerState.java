@@ -1,4 +1,4 @@
-package students.examples.devices;
+package student.examples.devices;
 
 public enum PowerState {
     OFF, ON

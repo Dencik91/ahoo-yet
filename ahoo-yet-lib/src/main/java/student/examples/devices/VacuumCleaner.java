@@ -1,7 +1,4 @@
-package students.examples.devices;
-
-import static students.examples.devices.PowerState.OFF;
-import static students.examples.devices.PowerState.ON;
+package student.examples.devices;
 
 public class VacuumCleaner implements HasPowerOnOff{
 
@@ -13,18 +10,18 @@ public class VacuumCleaner implements HasPowerOnOff{
 
     @Override
     public boolean switchOn() {
-        powerState = ON;
+        powerState = PowerState.ON;
         return true;
     }
 
     @Override
     public boolean switchOff() {
-        powerState = OFF;
+        powerState = PowerState.OFF;
         return false;
     }
 
     @Override
     public boolean isOn() {
-        return powerState != OFF;
+        return powerState != PowerState.OFF;
     }
 }

@@ -1,4 +1,4 @@
-package home.utilities;
+package student.examples;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
