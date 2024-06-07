@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Component Tests" verbose="2" annotations="JDK">
+    <groups>
+        <run>
+            <include name="unit"/>
+            <include name="integration"/>
+        </run>
+    </groups>
+    <test name="a-t1" preserve-order="true" >
+        <classes>
+            <class name="student.examples.DeviceIdentificationTest" />
+            <class name="student.examples.HasBatteryTest" />
+            <class name="student.examples.HasPowerStatesTest" />
+        </classes>
+    </test>
+</suite>

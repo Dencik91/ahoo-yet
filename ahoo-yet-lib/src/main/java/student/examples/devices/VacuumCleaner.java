@@ -1,6 +1,6 @@
 package student.examples.devices;
 
-public class VacuumCleaner extends Device implements HasPowerStates, HasBatery {
+public class VacuumCleaner extends NetworkDevice implements HasPowerStates, HasBatery {
 
     private PowerState powerState;
     private int charge;
