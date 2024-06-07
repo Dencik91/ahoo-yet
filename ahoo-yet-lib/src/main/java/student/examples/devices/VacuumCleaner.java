@@ -1,11 +1,32 @@
 package student.examples.devices;
 
-public class VacuumCleaner implements HasPowerOnOff{
+public class VacuumCleaner extends Device implements HasPowerStates, HasBatery {
 
     private PowerState powerState;
+    private int charge;
+    private final int MIN_CHARGE = 10;
 
     public VacuumCleaner() {
+        init();
+    }
+
+    public VacuumCleaner(int id, String name) {
+        super(id, name);
+        setCharge(0);
         switchOff();
+    }
+
+    private void init() {
+        setCharge(0);
+        switchOff();
+    }
+
+    public int getCharge() {
+        return charge;
+    }
+
+    public void setCharge(int charge) {
+        this.charge = charge;
     }
 
     @Override
@@ -23,5 +44,22 @@ public class VacuumCleaner implements HasPowerOnOff{
     @Override
     public boolean isOn() {
         return powerState != PowerState.OFF;
+    }
+
+    @Override
+    public boolean charge() {
+        setCharge(charge + 5);
+        return false;
+    }
+
+    @Override
+    public boolean disCharge() {
+        setCharge(charge - 5);
+        return false;
+    }
+
+    @Override
+    public boolean isCharge() {
+        return charge >= MIN_CHARGE;
     }
 }
