@@ -26,7 +26,9 @@ public class VacuumCleaner extends Device implements HasPowerStates, HasBatery {
     }
 
     public void setCharge(int charge) {
-        this.charge = charge;
+        if ((charge >= 0) && (charge <= 100)){
+            this.charge = charge;
+        }
     }
 
     @Override
@@ -48,6 +50,7 @@ public class VacuumCleaner extends Device implements HasPowerStates, HasBatery {
 
     @Override
     public boolean charge() {
+
         setCharge(charge + 5);
         return false;
     }
@@ -61,5 +64,13 @@ public class VacuumCleaner extends Device implements HasPowerStates, HasBatery {
     @Override
     public boolean isCharge() {
         return charge >= MIN_CHARGE;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\n |" +
+                "\n + --- >" +
+                ("  VacuumCleaner powerState=" + powerState + ", charge=" + charge);
     }
 }

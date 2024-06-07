@@ -1,12 +1,12 @@
-package student.examples.devices;
+package student.examples;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import student.examples.comm.ClientCommand;
 import student.examples.config.Configuration;
-import student.examples.devices.VacuumCleaner;
 import student.examples.comm.CommandType;
 import student.examples.comm.ServerCommand;
+import student.examples.devices.VacuumCleaner;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,7 +18,8 @@ public class VacuumCleanerApp
     final static Logger logger = LoggerFactory.getLogger(VacuumCleanerApp.class);
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         logger.info("Starting logs");
-        VacuumCleaner vacuumCleaner = new VacuumCleaner();
+        VacuumCleaner vacuumCleaner = new VacuumCleaner(1, "Atom");
+        System.out.println(vacuumCleaner);
 
         logger.info(String.format("%b",vacuumCleaner.isOn()));
 

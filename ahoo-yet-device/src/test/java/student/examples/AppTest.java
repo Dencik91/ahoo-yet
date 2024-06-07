@@ -1,4 +1,4 @@
-package student.examples.devices;
+package student.examples;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
