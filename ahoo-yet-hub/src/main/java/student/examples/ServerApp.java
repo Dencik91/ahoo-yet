@@ -10,8 +10,10 @@ import student.examples.config.Configuration;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -20,34 +22,32 @@ public class ServerApp
 {
     final static Logger logger = LoggerFactory.getLogger(ServerApp.class);
     private Set<Map<String, Object>> connections;
+    private ServerSocket serverSocket;
 
-    public ServerApp () {
+    public ServerApp (int port) throws IOException {
+        create(port);
+    }
+
+    private void create(int port) throws IOException {
         connections = new HashSet<>();
+        serverSocket = new ServerSocket(port, 0, InetAddress.getLocalHost());
+    }
+
+    private void listen() throws IOException {
+        while (true) {
+            Socket clientSocket = serverSocket.accept();
+            logger.info(String.format("SERVER: Client connected: %s", clientSocket.getInetAddress()));
+            Map<String,Object> client = new HashMap<>();
+            client.put("socket", clientSocket);
+            connections.add(client);
+        }
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        logger.info("Started");
-        ServerSocket serverSocket = new ServerSocket(Configuration.PORT);
-        Socket clientSocket = serverSocket.accept();
-
-        ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
-        ServerCommand turnOnCommand = new ServerCommand(CommandType.TURN_ON);
-        oos.writeObject(turnOnCommand);
-
-        ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-        ClientCommand clientCommand = (ClientCommand) ois.readObject();
-
-        logger.info(String.format("%s",clientCommand.getType()));
-
-        ServerCommand turnOffCommand = new ServerCommand(CommandType.TURN_OFF);
-        if(clientCommand.getType().equals(CommandType.ACKNOWLEDGE)) {
-            oos.writeObject(turnOffCommand);
-        }
-
-        clientCommand = (ClientCommand) ois.readObject();
-
-        logger.info(String.format("%s",clientCommand.getType()));
-
-        logger.info("Stopped");
+        logger.info("SERVER: Initializing");
+        ServerApp app = new ServerApp(10000);
+        logger.info("SERVER: Starting");
+        app.listen();
+        logger.info("SERVER: Shut down");
     }
 }
