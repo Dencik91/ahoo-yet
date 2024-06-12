@@ -1,17 +1,6 @@
 package student.examples;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
-import student.examples.comm.ClientCommand;
-import student.examples.comm.CommandType;
-import student.examples.comm.ServerCommand;
-import student.examples.config.Configuration;
-
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -19,7 +8,7 @@ import java.util.Set;
 
 public class ServerApp
 {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         Set<Map<String, Object>> connections;
         connections = new HashSet<>();
 
@@ -34,5 +23,9 @@ public class ServerApp
         connections.add(client2);
 
         connections.forEach(client-> System.out.println(client));
+    }
+
+    public static void dummyMethod() {
+        System.out.println("Executing dummy method");
     }
 }
