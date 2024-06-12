@@ -12,10 +12,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class ServerApp
 {
     final static Logger logger = LoggerFactory.getLogger(ServerApp.class);
+    private Set<Map<String, Object>> connections;
+
+    public ServerApp () {
+        connections = new HashSet<>();
+    }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         logger.info("Started");
