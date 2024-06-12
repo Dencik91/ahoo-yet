@@ -25,6 +25,7 @@ public class ServerApp
         connections = new HashSet<>();
     }
 
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         logger.info("Started");
         ServerSocket serverSocket = new ServerSocket(Configuration.PORT);
