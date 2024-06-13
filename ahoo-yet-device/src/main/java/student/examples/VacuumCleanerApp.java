@@ -3,6 +3,7 @@ package student.examples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import student.examples.comm.ClientCommand;
+import student.examples.comm.Command;
 import student.examples.config.Configuration;
 import student.examples.comm.CommandType;
 import student.examples.comm.ServerCommand;
@@ -25,6 +26,11 @@ public class VacuumCleanerApp
         ClientCommand clientCommand = new ClientCommand(CommandType.IDENTITY, vacuumCleaner);
         oos.writeObject(clientCommand);
         oos.flush();
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        Command command = (Command) ois.readObject();
+        if(command.getType() == CommandType.ACKNOWLEDGE) {
+            System.out.println("Connected to server");
+        }
 
     }
 }

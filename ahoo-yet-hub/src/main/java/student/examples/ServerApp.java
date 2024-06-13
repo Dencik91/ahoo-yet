@@ -39,6 +39,7 @@ public class ServerApp
         while (true) {
             Socket clientSocket = serverSocket.accept();
             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream oos;
             Command command = (Command) ois.readObject();
             if (command.getType() == CommandType.IDENTITY) {
                 logger.info(String.format("SERVER: Client connected: %s", clientSocket.getInetAddress()));
@@ -47,6 +48,10 @@ public class ServerApp
                 client.put("socket", clientSocket);
                 client.put("device", device);
                 connections.add(client);
+                logger.info(String.format("SERVER: Send Acknowledge to client"));
+                ServerCommand serverCommand = new ServerCommand(CommandType.ACKNOWLEDGE, null);
+                oos = new ObjectOutputStream(clientSocket.getOutputStream());
+                oos.writeObject(serverCommand);
             }
             connections.forEach(System.out::println);
 

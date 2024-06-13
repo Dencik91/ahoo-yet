@@ -25,6 +25,7 @@ public class VacuumCleaner extends NetworkDevice implements HasPowerStates, HasB
         return charge;
     }
 
+    @Override
     public void setCharge(int charge) {
         if ((charge >= 0) && (charge <= 100)){
             this.charge = charge;
